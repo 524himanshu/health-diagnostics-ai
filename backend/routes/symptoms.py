@@ -4,7 +4,7 @@ from transformers import pipeline
 symptoms_bp = Blueprint('symptoms', __name__)
 
 # Symptom analysis pipeline
-nlp = pipeline("text-classification", model="roberta-base")
+nlp = pipeline("text-classification", model="distilbert-base-uncased")
 
 @symptoms_bp.route('/', methods=['POST'])
 def analyze_symptoms():
