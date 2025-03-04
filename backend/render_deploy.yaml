@@ -1,0 +1,9 @@
+services:
+  - name: health-diagnostics-backend
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python backend/app.py"
+    envVars:
+      - key: MONGO_URI
+        value: "mongodb+srv://<your_username>:<your_password>@cluster0.mongodb.net/health-diagnostics?retryWrites=true&w=majority"
+    plan: free
