@@ -1,6 +1,6 @@
 from flask import Flask
-from backend.routes.symptoms import symptoms_bp
-from backend.routes.reports import reports_bp
+from routes.symptoms import symptoms_bp
+from routes.reports import reports_bp
 
 app = Flask(__name__)
 
