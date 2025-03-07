@@ -1,18 +1,17 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "frontend/package.json",
-        "use": "@vercel/next"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/frontend/$1"
-      }
-    ],
-    "env": {
-      "NEXT_PUBLIC_BACKEND_URL": "https://health-diagnostics-backend.onrender.com"
+  "version": 2,
+  "public": "frontend",
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://health-diagnostics-backend.onrender.com/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
     }
+  ],
+  "env": {
+    "NEXT_PUBLIC_BACKEND_URL": "https://health-diagnostics-backend.onrender.com"
   }
+}
