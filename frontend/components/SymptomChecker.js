@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function SymptomChecker() {
@@ -7,10 +7,26 @@ export default function SymptomChecker() {
   const [followUp, setFollowUp] = useState("");
   const [file, setFile] = useState(null);
   const [reportData, setReportData] = useState({});
+  const [fetchedSymptoms, setFetchedSymptoms] = useState([]);
+
+  useEffect(() => {
+    const fetchSymptoms = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/symptoms`);
+        const data = await response.json();
+        setFetchedSymptoms(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching symptoms:", error);
+      }
+    };
+
+    fetchSymptoms();
+  }, []);
 
   const handleSymptomSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/symptoms", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/symptoms`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ symptoms }),
@@ -25,7 +41,7 @@ export default function SymptomChecker() {
     const formData = new FormData();
     formData.append("file", file);
 
-    const res = await fetch("/api/report", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/report`, {
       method: "POST",
       body: formData,
     });
