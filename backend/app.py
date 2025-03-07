@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from routes.symptoms import symptoms_bp
 from routes.reports import reports_bp
 import os
@@ -9,6 +9,11 @@ app = Flask(__name__)
 app.register_blueprint(symptoms_bp, url_prefix='/api/symptoms')
 app.register_blueprint(reports_bp, url_prefix='/api/report')
 
+@app.route('/routes', methods=['GET'])
+def show_routes():
+    return jsonify([str(rule) for rule in app.url_map.iter_rules()])
+
+
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # Use Render's port or default to 5000
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
