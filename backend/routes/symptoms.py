@@ -14,6 +14,7 @@ HEADERS = {
 
 @symptoms_bp.route('/', methods=['POST'])
 def analyze_symptoms():
+    print("🚀 /api/symptoms route hit!")  # Debugging log
     data = request.json
     user_input = data.get("symptoms")
 
@@ -31,3 +32,7 @@ def analyze_symptoms():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@symptoms_bp.route('/test', methods=['GET'])
+def test_route():
+    return jsonify({"message": "Symptoms route is working!"})
