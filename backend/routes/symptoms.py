@@ -23,6 +23,8 @@ def analyze_symptoms():
     print("🚀 /api/symptoms route hit!")  # Debug log
     data = request.json
     user_input = data.get("symptoms")
+    if not user_input:
+            return jsonify({"error": "No symptoms provided"}), 400
 
     try:
         response = requests.post(HUGGINGFACE_API_URL, headers=HEADERS, json={"inputs": user_input})
@@ -37,6 +39,7 @@ def analyze_symptoms():
             follow_up = "How long have you had the fever? Do you also have chills or body aches?"
         elif "fatigue" in user_input.lower():
             follow_up = "Is the fatigue persistent or occasional? Are you getting enough sleep?"
+        
 
         return jsonify({
             "prediction": prediction_label,

@@ -16,6 +16,9 @@ def analyze_report():
     file = request.files['file']
     reader = PyPDF2.PdfReader(file)
     report_text = "".join(page.extract_text() for page in reader.pages if page and page.extract_text())
+    if not report_text:
+        return jsonify({"error": "Could not extract text from the report"}), 400
+
 
     # Extract medical values using regex
     hemoglobin = re.search(r'Hemoglobin\s+(\d+\.\d+)\s+g/dL', report_text)
@@ -40,5 +43,6 @@ def analyze_report():
         recommendations.append("Elevated RBC count. Suggest consulting a hematologist for further evaluation.")
     if platelets and int(platelets[1]) > 410:
         recommendations.append("High platelet count detected. Possible inflammation or other underlying condition — consult a specialist.")
+    
 
     return jsonify({"results": results, "recommendations": recommendations})
