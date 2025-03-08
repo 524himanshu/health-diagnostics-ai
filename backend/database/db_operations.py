@@ -2,8 +2,7 @@ from backend.database.db_config import users_collection, reports_collection
 
 def save_user(data):
     """Save user information to the database"""
-    user = users_collection.find_one({"email": data["email"]})
-    if user:
+    if user := users_collection.find_one({"email": data["email"]}):
         return "User already exists"
     users_collection.insert_one(data)
     return "User registered successfully"

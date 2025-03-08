@@ -9,6 +9,10 @@ app = Flask(__name__)
 app.register_blueprint(symptoms_bp, url_prefix='/api/symptoms')
 app.register_blueprint(reports_bp, url_prefix='/api/report')
 
+@app.route('/api/test')
+def test():
+    return {'message': 'API is working'}
+
 @app.route('/routes', methods=['GET'])
 def show_routes():
     return jsonify([str(rule) for rule in app.url_map.iter_rules()])
