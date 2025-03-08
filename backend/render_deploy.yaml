@@ -6,4 +6,6 @@ services:
     envVars:
       - key: MONGO_URI
         value: "mongodb+srv://<your_username>:<your_password>@cluster0.mongodb.net/health-diagnostics?retryWrites=true&w=majority"
+      - key: PORT
+        value: "5000"  # <-- Add this line
     plan: free
