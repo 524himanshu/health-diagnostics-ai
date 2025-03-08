@@ -4,5 +4,4 @@ from transformers import pipeline
 symptom_classifier = pipeline("text-classification", model="roberta-base")
 
 def classify_symptoms(user_input):
-    result = symptom_classifier(user_input)
-    return result
+    return symptom_classifier(user_input)

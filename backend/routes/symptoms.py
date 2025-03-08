@@ -12,6 +12,12 @@ HEADERS = {
     "Authorization": f"Bearer {os.getenv('HUGGINGFACE_API_KEY')}"
 }
 
+
+@symptoms_bp.route('/test', methods=['GET'])
+def test_symptoms():
+    return jsonify({'message': 'Symptoms route working'})
+
+
 @symptoms_bp.route('/', methods=['POST'])
 def analyze_symptoms():
     print("🚀 /api/symptoms route hit!")  # Debug log
