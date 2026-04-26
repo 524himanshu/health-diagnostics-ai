@@ -3,6 +3,10 @@ from routes.symptoms import symptoms_bp
 from routes.reports import reports_bp
 import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_PATH = os.path.join(BASE_DIR, '../frontend')
+
+
 app = Flask(__name__)
 
 # Registering blueprints
@@ -10,8 +14,8 @@ app.register_blueprint(symptoms_bp, url_prefix='/api/symptoms')
 app.register_blueprint(reports_bp, url_prefix='/api/report')
 
 @app.route('/')
-def serve_dashboard():
-    return send_from_directory('../frontend', 'dashboard.js')
+def home():
+    return "Backend is running"
 
 @app.route('/api/test')
 def test():
