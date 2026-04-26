@@ -10,7 +10,7 @@ export default function Dashboard() {
     formData.append('file', file);
 
     try {
-      const res = await fetch('https://health-diagnostics-ai.onrender.com/api/report', {
+      const res = await fetch('https://health-diagnostics-ai.onrender.com/api/report/upload', {
         method: 'POST',
         body: formData,
       });
