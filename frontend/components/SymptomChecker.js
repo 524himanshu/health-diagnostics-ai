@@ -12,7 +12,7 @@ export default function SymptomChecker() {
   useEffect(() => {
     const fetchSymptoms = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/symptoms`);
+        const response = await fetch(`${process.env.NENEXT_PUBLIC_API_URL}/api/symptoms`);
         const data = await response.json();
         setFetchedSymptoms(data);
         console.log(data);
@@ -26,7 +26,7 @@ export default function SymptomChecker() {
 
   const handleSymptomSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/symptoms`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/symptoms`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ symptoms }),
@@ -41,7 +41,7 @@ export default function SymptomChecker() {
     const formData = new FormData();
     formData.append("file", file);
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/report`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/report`, {
       method: "POST",
       body: formData,
     });
