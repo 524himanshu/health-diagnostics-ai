@@ -17,7 +17,7 @@ export default function Dashboard() {
   formData.append('file', file);
 
   try {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
     const res = await fetch(`/api/report/upload`, {
       method: 'POST',
