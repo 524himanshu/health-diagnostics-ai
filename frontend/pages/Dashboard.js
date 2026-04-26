@@ -19,7 +19,7 @@ export default function Dashboard() {
   try {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-    const res = await fetch(`${API_URL}/api/report/upload`, {
+    const res = await fetch(`/api/report/upload`, {
       method: 'POST',
       body: formData,
     });
