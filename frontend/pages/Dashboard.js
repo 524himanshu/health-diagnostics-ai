@@ -4,23 +4,37 @@ export default function Dashboard() {
   const [file, setFile] = useState(null);
   const [reportData, setReportData] = useState({});
 
+
   const handleFileUpload = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('file', file);
+  e.preventDefault();
 
-    try {
-      const res = await fetch('https://health-diagnostics-ai.onrender.com/api/report/upload', {
-        method: 'POST',
-        body: formData,
-      });
+  if (!file) {
+    alert("Please select a file first");
+    return;
+  }
 
-      const data = await res.json();
-      setReportData(data);
-    } catch (error) {
-      console.error('Failed to upload report:', error);
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+    const res = await fetch(`${API_URL}/api/report/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text);
     }
-  };
+
+    const data = await res.json();
+    setReportData(data);
+  } catch (error) {
+    console.error('Failed to upload report:', error);
+  }
+};
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
